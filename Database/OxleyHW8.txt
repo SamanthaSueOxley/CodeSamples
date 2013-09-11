@@ -1,0 +1,104 @@
+mysql> source C:\Users\Samantha\Desktop\Database\HW8\OxleyHW8.sql
+--------------
+SELECT concat(publisher.city, ', ', state.statecode) AS Location, COUNT(publisher.name) AS Count FROM state JOIN publisher ON state.statecode = publisher.statecode GROUP BY Location
+--------------
+
++-------------------+-------+
+| Location          | Count |
++-------------------+-------+
+| Boston, MA        |     1 |
+| Chicago, IL       |     3 |
+| Hartford, CT      |     1 |
+| New York, NY      |     4 |
+| Rochester, MN     |     1 |
+| Rochester, NY     |     2 |
+| San Francisco, CA |     1 |
++-------------------+-------+
+7 rows in set (0.04 sec)
+
+--------------
+SELECT book.title, COUNT(bookreview.rating) AS 'Total Ratings', MIN(bookreview.rating) AS 'Low', MAX(bookreview.rating) AS 'High', 
+	ROUND(AVG(bookreview.rating),2) AS 'Average' FROM book LEFT JOIN bookreview ON book.isbn = bookreview.isbn 
+	GROUP BY book.title ORDER BY COUNT(bookreview.rating) DESC, AVG(bookreview.rating) DESC
+--------------
+
++--------------------------------------------------+---------------+------+------+---------+
+| title                                            | Total Ratings | Low  | High | Average |
++--------------------------------------------------+---------------+------+------+---------+
+| Yes! Networking is for Bills Fans                |             3 |    5 |    8 |    6.33 |
+| The Shortest Book in the World                   |             2 |   10 |   10 |   10.00 |
+| My Love's Last Lingering Lost                    |             2 |    8 |    9 |    8.50 |
+| From Brockport to IT                             |             2 |    7 |   10 |    8.50 |
+| How to Keep your Cellular Bill Down              |             2 |    7 |    8 |    7.50 |
+| Women are From Venus ORACLE is from Beyond Pluto |             1 |   10 |   10 |   10.00 |
+| My Love's Last Longing                           |             1 |   10 |   10 |   10.00 |
+| JAVA: It's more than Just a Programming Language |             1 |    9 |    9 |    9.00 |
+| How to add Class to your Programming             |             1 |    9 |    9 |    9.00 |
+| My Lost Love's Long Last Lingering               |             1 |    9 |    9 |    9.00 |
+| I Lasted my Love's Last Lingering Longing        |             1 |    7 |    7 |    7.00 |
+| How to Keep your Cable Bill Down                 |             1 |    7 |    7 |    7.00 |
+| My Love's at Long Last Lost his Lingering        |             1 |    7 |    7 |    7.00 |
+| From Deep in the Heart of Texas to IT            |             1 |    6 |    6 |    6.00 |
+| ER, SOM, NF, DK/NF, SQL, JDBC, ODBC, and RELVAR  |             1 |    4 |    4 |    4.00 |
+| From the Shores of Lake Erie to IT               |             1 |    4 |    4 |    4.00 |
+| Master Wireless Through The Classic Comics       |             0 | NULL | NULL |    NULL |
+| The Science of Literature Searching              |             0 | NULL | NULL |    NULL |
+| A language without Pointers? Priceless.          |             0 | NULL | NULL |    NULL |
+| Master HTML Through The Classic Comics           |             0 | NULL | NULL |    NULL |
+| Calculus for Phys Ed Majors                      |             0 | NULL | NULL |    NULL |
+| Tired of wired? Infrared instead!                |             0 | NULL | NULL |    NULL |
+| Master C++ Through The Classic Comics            |             0 | NULL | NULL |    NULL |
++--------------------------------------------------+---------------+------+------+---------+
+23 rows in set (0.00 sec)
+
+--------------
+SELECT publisher.Name, COUNT(publisher.Name) as 'Book Count' FROM publisher JOIN book ON publisher.publisherID = book.publisherID 
+	GROUP BY publisher.Name HAVING COUNT(publisher.Name) > 2 ORDER BY COUNT(publisher.Name) DESC
+--------------
+
++----------------------------------+------------+
+| Name                             | Book Count |
++----------------------------------+------------+
+| ReadEmandWeep Romance Publishing |          5 |
+| CovertoCover Publishing          |          4 |
+| EZRead Masterpiece Comics        |          3 |
++----------------------------------+------------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT Title, char_length(Title) AS Length, SUBSTR(Title, locate('bill', Title) + 4) AS 'After Bill' FROM book WHERE Title LIKE '%bill%'
+--------------
+
++-------------------------------------+--------+------------+
+| Title                               | Length | After Bill |
++-------------------------------------+--------+------------+
+| Yes! Networking is for Bills Fans   |     33 | s Fans     |
+| How to Keep your Cellular Bill Down |     35 |  Down      |
+| How to Keep your Cable Bill Down    |     32 |  Down      |
++-------------------------------------+--------+------------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT book.Title FROM ownersbook JOIN book ON ownersbook.ISBN = book.ISBN WHERE ownersbook.TransactionFlag = 's'
+--------------
+
++-------------------------------------------------+
+| Title                                           |
++-------------------------------------------------+
+| My Love's Last Longing                          |
+| From Deep in the Heart of Texas to IT           |
+| Yes! Networking is for Bills Fans               |
+| How to Keep your Cellular Bill Down             |
+| ER, SOM, NF, DK/NF, SQL, JDBC, ODBC, and RELVAR |
+| How to Keep your Cellular Bill Down             |
+| ER, SOM, NF, DK/NF, SQL, JDBC, ODBC, and RELVAR |
+| From Deep in the Heart of Texas to IT           |
+| How to Keep your Cellular Bill Down             |
+| I Lasted my Love's Last Lingering Longing       |
+| My Lost Love's Long Last Lingering              |
+| The Shortest Book in the World                  |
+| From the Shores of Lake Erie to IT              |
++-------------------------------------------------+
+13 rows in set (0.00 sec)
+
+mysql> notee;
