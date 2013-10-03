@@ -1,0 +1,5 @@
+Tom Smith,1 Main Street,Rochester,New York,14623
+Bill Bob Thort,2304 Other Way,Nashville,Tennessee,14623-0101
+Samantha Oxley,561 Chillington Lane,San Francisco,California,950333
+Daniel Gaddis,4023 Mountain View Dr.,Buford,Arkansas,47203-564
+Jimmie Jo Jones,169 Maplewood Street,Land-O-Lakes,Minnesota,67209
